@@ -19,5 +19,5 @@ public protocol LUAutocompleteViewDataSource: class {
         - text: A string representing the input from the text field.
         - completion: A closure that contains the elements matching `text` that will be displayed by autocomplete view.
     */
-    func autocompleteView(_ autocompleteView: LUAutocompleteView, elementsFor text: String, completion: @escaping ([String]) -> Void)
+    func autocompleteView(_ autocompleteView: LUAutocompleteView, elementsFor text: String, completion: @escaping ([AnyObject]) -> Void)
 }

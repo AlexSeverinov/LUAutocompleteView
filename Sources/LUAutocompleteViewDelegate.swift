@@ -16,5 +16,5 @@ public protocol LUAutocompleteViewDelegate: class {
         - autocompleteView: An autocomplete view object informing the delegate about the selected text.
         - text: A string that was selected in autocomplete view.
     */
-    func autocompleteView(_ autocompleteView: LUAutocompleteView, didSelect text: String)
+    func autocompleteView(_ autocompleteView: LUAutocompleteView, didSelect object: AnyObject)
 }

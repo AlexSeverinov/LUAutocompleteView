@@ -12,8 +12,8 @@ import LUAutocompleteView
 final class CustomAutocompleteTableViewCell: LUAutocompleteTableViewCell {
     // MARK: - Base Class Overrides
     
-    override func set(text: String) {
-        textLabel?.text = text
+    override func set(object: AnyObject) {
+        textLabel?.text = object as? String
         textLabel?.textColor = .red
     }
 }

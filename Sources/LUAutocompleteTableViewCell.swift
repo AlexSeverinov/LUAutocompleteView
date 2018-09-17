@@ -18,7 +18,7 @@ open class LUAutocompleteTableViewCell: UITableViewCell {
      
     - Warning: Must be implemented by each subclass.
     */
-    open func set(text: String) {
+    open func set(object: AnyObject) {
         preconditionFailure("This function must be implemented by each subclass")
     }
 }

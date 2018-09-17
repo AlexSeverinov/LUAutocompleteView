@@ -38,16 +38,18 @@ final class ViewController: UIViewController {
 // MARK: - LUAutocompleteViewDataSource
 
 extension ViewController: LUAutocompleteViewDataSource {
-    func autocompleteView(_ autocompleteView: LUAutocompleteView, elementsFor text: String, completion: @escaping ([String]) -> Void) {
+    func autocompleteView(_ autocompleteView: LUAutocompleteView, elementsFor text: String, completion: @escaping ([AnyObject]) -> Void) {
         let elementsThatMatchInput = elements.filter { $0.lowercased().contains(text.lowercased()) }
-        completion(elementsThatMatchInput)
+        completion(elementsThatMatchInput as? [AnyObject] ?? [])
     }
+    
+
 }
 
 // MARK: - LUAutocompleteViewDelegate
 
 extension ViewController: LUAutocompleteViewDelegate {
-    func autocompleteView(_ autocompleteView: LUAutocompleteView, didSelect text: String) {
-        print(text + " was selected from autocomplete view")
+    func autocompleteView(_ autocompleteView: LUAutocompleteView, didSelect object: AnyObject) {
+        print(object.description + " was selected from autocomplete view")
     }
 }
