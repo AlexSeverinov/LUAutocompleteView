@@ -9,7 +9,8 @@
 import Foundation
 
 /// The delegate of a `LUAutocompleteView` object.
-public protocol LUAutocompleteViewDelegate: class {
+@objc
+public protocol LUAutocompleteViewDelegate {
     /** Tells the delegate the text that user selected.
 
     - Parameters:
