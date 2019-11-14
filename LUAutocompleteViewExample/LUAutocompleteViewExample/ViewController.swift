@@ -24,6 +24,9 @@ final class ViewController: UIViewController {
 
         view.addSubview(autocompleteView)
 
+        autocompleteView.optionalLeadingAnchorConstraint = view.leadingAnchor.constraint(equalTo: autocompleteView.leadingAnchor)
+        autocompleteView.optionalTrailingAnchorConstraint = view.trailingAnchor.constraint(equalTo: autocompleteView.trailingAnchor)
+        
         autocompleteView.textField = textField
         autocompleteView.dataSource = self
         autocompleteView.delegate = self
@@ -40,7 +43,7 @@ final class ViewController: UIViewController {
 extension ViewController: LUAutocompleteViewDataSource {
     func autocompleteView(_ autocompleteView: LUAutocompleteView, elementsFor text: String, completion: @escaping ([AnyObject]) -> Void) {
         let elementsThatMatchInput = elements.filter { $0.lowercased().contains(text.lowercased()) }
-        completion(elementsThatMatchInput as? [AnyObject] ?? [])
+        completion(elementsThatMatchInput as [AnyObject])
     }
     
 

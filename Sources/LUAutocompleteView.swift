@@ -16,6 +16,19 @@ open class LUAutocompleteView: UIView {
     /// The object that acts as the delegate of the autocomplete view.
     public weak var delegate: LUAutocompleteViewDelegate?
 
+    /// set this anchors if wants different width of AutocompleteView  than UITextField
+    /// by default AutocompleteView.leadingAnchor = UITextField.leadingAnchor,  AutocompleteView.trailingAnchor = UITextField.trailingAnchor
+    public var optionalLeadingAnchorConstraint: NSLayoutConstraint? {
+        didSet {
+            setupConstraints()
+        }
+    }
+    public var optionalTrailingAnchorConstraint: NSLayoutConstraint? {
+        didSet {
+            setupConstraints()
+        }
+    }
+    
     /** The time interval responsible for regulating the rate of calling data source function.
     If typing stops for a time interval greater than `throttleTime`, then the data source function will be called.
     Default value is `0.4`.
@@ -153,13 +166,22 @@ open class LUAutocompleteView: UIView {
 
         heightConstraint = heightAnchor.constraint(equalToConstant: 0)
 
+        let leadingAnchorConstraint = optionalLeadingAnchorConstraint != nil ?
+            optionalLeadingAnchorConstraint! :
+            leadingAnchor.constraint(equalTo: textField.leadingAnchor)
+
+        
+        let trailingAnchorConstraint = optionalTrailingAnchorConstraint != nil ?
+            optionalTrailingAnchorConstraint! :
+            trailingAnchor.constraint(equalTo: textField.trailingAnchor)
+        
         let constraints = [
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.topAnchor.constraint(equalTo: topAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            leadingAnchor.constraint(equalTo: textField.leadingAnchor),
-            trailingAnchor.constraint(equalTo: textField.trailingAnchor),
+            leadingAnchorConstraint,
+            trailingAnchorConstraint,
             topAnchor.constraint(equalTo: textField.bottomAnchor),
             heightConstraint!
         ]
