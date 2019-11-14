@@ -154,7 +154,6 @@ open class LUAutocompleteView: UIView {
 
     private func setupConstraints() {
         guard let textField = textField else {
-            assertionFailure("Sanity check")
             return
         }
 
