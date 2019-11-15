@@ -92,16 +92,11 @@ open class LUAutocompleteView: UIView {
     }
     private var height: CGFloat = 0 {
         didSet {
-            guard height != oldValue else {
-                return
-            }
-
             guard let superview = superview else {
                 heightConstraint?.constant = (height > maximumHeight) ? maximumHeight : height
                 return
             }
 
-            superview.layoutIfNeeded()
             UIView.animate(withDuration: 0.2) {
                 self.heightConstraint?.constant = (self.height > self.maximumHeight) ? self.maximumHeight : self.height
                 superview.layoutIfNeeded()
