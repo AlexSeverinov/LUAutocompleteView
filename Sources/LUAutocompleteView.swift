@@ -34,6 +34,10 @@ open class LUAutocompleteView: UIView {
     Default value is `0.4`.
     */
     public var throttleTime: TimeInterval = 0.4
+    
+    /// The minimum caharacters for calling  data source function
+    public var minimumCharactersToSearch = 2
+    
     /// The maximum height of autocomplete view. Default value is `200.0`.
     public var maximumHeight: CGFloat = 200.0
     /// A boolean value that determines whether the view should hide after a suggestion is selected. Default value is `true`.
@@ -193,7 +197,7 @@ open class LUAutocompleteView: UIView {
             return
         }
 
-        guard let text = textField?.text, !text.isEmpty else {
+        guard let text = textField?.text, !text.isEmpty && text.count >= minimumCharactersToSearch else {
             elements.removeAll()
             return
         }
