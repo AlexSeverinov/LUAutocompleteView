@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.ios.deployment_target = '9.0'
   s.swift_version = '5.0'
-  s.cocoapods_version = '>= 1.6.0'
+  s.cocoapods_version = '>= 1.5.3'
   
   s.source_files   = "Sources/*.{swift}"
   s.preserve_paths = "README*"
