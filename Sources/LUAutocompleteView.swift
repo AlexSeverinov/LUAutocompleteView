@@ -94,20 +94,26 @@ open class LUAutocompleteView: UIView {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                self.height = self.tableView.contentSize.height
             }
-            height = tableView.contentSize.height
         }
     }
     private var height: CGFloat = 0 {
         didSet {
-            guard let superview = superview else {
-                heightConstraint?.constant = (height > maximumHeight) ? maximumHeight : height
-                return
-            }
-
-            UIView.animate(withDuration: 0.2) {
-                self.heightConstraint?.constant = (self.height > self.maximumHeight) ? self.maximumHeight : self.height
-                superview.layoutIfNeeded()
+            DispatchQueue.main.async {
+                guard let superview = self.superview else {
+                    self.heightConstraint?.constant = (self.height > self.maximumHeight) ?
+                        self.maximumHeight :
+                        self.height
+                    return
+                }
+                
+                UIView.animate(withDuration: 0.2) {
+                    self.heightConstraint?.constant = (self.height > self.maximumHeight) ?
+                        self.maximumHeight :
+                        self.height
+                    superview.layoutIfNeeded()
+                }
             }
         }
     }
