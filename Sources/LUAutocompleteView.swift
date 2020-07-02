@@ -73,7 +73,9 @@ open class LUAutocompleteView: UIView {
             }
 
             tableView.register(autocompleteCell, forCellReuseIdentifier: LUAutocompleteView.cellIdentifier)
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     /// The height of each row (that is, table cell) in the autocomplete table view. Default value is `40.0`.
@@ -90,7 +92,9 @@ open class LUAutocompleteView: UIView {
     private static let cellIdentifier = "AutocompleteCellIdentifier"
     private var elements = [AnyObject]() {
         didSet {
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
             height = tableView.contentSize.height
         }
     }
