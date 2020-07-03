@@ -209,7 +209,17 @@ open class LUAutocompleteView: UIView {
     @objc private func textFieldEditingBegin() {
         if shouldShowOnSelecting {
             NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(getElements), object: nil)
-            perform(#selector(getElements), with: nil)
+            perform(#selector(getAllElements), with: nil)
+        }
+    }
+
+    @objc private func getAllElements() {
+        guard let dataSource = dataSource else {
+            return
+        }
+
+        dataSource.autocompleteView(self, elementsFor: "") { [weak self] elements in
+            self?.elements = elements
         }
     }
     
