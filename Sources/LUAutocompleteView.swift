@@ -42,6 +42,9 @@ open class LUAutocompleteView: UIView {
     public var maximumHeight: CGFloat = 200.0
     /// A boolean value that determines whether the view should hide after a suggestion is selected. Default value is `true`.
     public var shouldHideAfterSelecting = true
+    /// A boolean value that determines whether the view should show suggestion on selected. Default value is `false`.
+    public var shouldShowOnSelecting = false
+
     /** The attributes for the text suggestions.
      
     - Note: This property will be ignored if `autocompleteCell` is not `nil`.
@@ -56,7 +59,8 @@ open class LUAutocompleteView: UIView {
 
             textField.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
             textField.addTarget(self, action: #selector(textFieldEditingEnded), for: .editingDidEnd)
-
+            textField.addTarget(self, action: #selector(textFieldEditingBegin), for: .editingDidBegin)
+            
             setupConstraints()
         }
     }
@@ -202,6 +206,13 @@ open class LUAutocompleteView: UIView {
         perform(#selector(getElements), with: nil, afterDelay: throttleTime)
     }
 
+    @objc private func textFieldEditingBegin() {
+        if shouldShowOnSelecting {
+            NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(getElements), object: nil)
+            perform(#selector(getElements), with: nil)
+        }
+    }
+    
     @objc private func getElements() {
         guard let dataSource = dataSource else {
             return
